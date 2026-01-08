@@ -1,0 +1,36 @@
+<!-- student info -->
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <!-- render the student info -->
+    <main class="container">
+        <%- include("partials/header", { title, activePage }) %>
+            <div class="card">
+                <h1>
+                    <%= title %>
+                </h1>
+                <ul>
+                    <% students.forEach(s=> { %>
+                        <li>
+                            <a href="/students/<%= s.id %>">
+                                <%= s.name %>
+                            </a>
+                            — <%= s.major %>
+                        </li>
+                        <% }) %>
+                </ul>
+            </div>
+
+            <%- include("partials/footer") %>
+    </main>
+</body>
+
+</html>

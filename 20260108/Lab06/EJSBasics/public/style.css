@@ -1,0 +1,22 @@
+.card {
+  background-color: rgb(233, 233, 238);
+  padding: 50px;
+  max-width: 800px;
+  margin: auto;
+}
+
+nav a.active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.site-footer {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.site-header {
+  max-width: 900px;
+
+  margin: auto;
+}

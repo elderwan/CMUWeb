@@ -1,0 +1,10 @@
+<footer class="site-footer">
+    <% if (typeof footers !=='undefined' && footers) { %>
+        <div class="footer-content">
+            <%= footers %>
+        </div>
+        <% } else { %>
+            <p>&copy;CopyRight <%= new Date().getFullYear() %>
+            </p>
+            <% } %>
+</footer>

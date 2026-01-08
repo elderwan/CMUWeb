@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= title %>
+    </title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+    <main class="container">
+        <%- include("partials/header", { title, activePage }) %>
+
+            <div class="card">
+                <h1>
+                    <%= title %>
+                </h1>
+
+                <h2>Topics List</h2>
+                <ul class="topics-list">
+                    <% topics.forEach(t=> { %>
+                        <li>
+                            <%= t %>
+                        </li>
+                        <% }) %>
+                </ul>
+
+                <% if (topics.length>= 4) { %>
+                    <p class="message success">✓ You have enough topics for today.</p>
+                    <% } else { %>
+                        <p class="message info">+ Add more topics.</p>
+                        <% } %>
+            </div>
+    </main>
+
+    <%- include("partials/footer", { footers }) %>
+
+</body>
+
+</html>
