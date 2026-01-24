@@ -1,0 +1,23 @@
+<%- include("partials/header") %>
+
+
+    <h1 class="text-3xl ">Compose</h1>
+    <form action="/compose" method="POST" class="flex flex-col mt-4">
+        <h1>Title</h1>
+        <input type="text" name="title" id="title" placeholder="title"
+            class="w-full mb-4 p-2 border border-gray-300 rounded-lg max-w-80" />
+
+
+
+        <h1>Message</h1>
+        <textarea type="text" name="message" id="message" placeholder="write your message here..."
+            class="w-full mb-4 h-50 p-2 border border-gray-300 rounded-lg max-w-240"></textarea>
+
+        <!-- post button -->
+
+        <button type="submit"
+            class="cursor-pointer hover:bg-gray-200 py-2 px-4 bg-[#00bc7d] rounded-lg w-fit text-white hover:text-black">Publish</button>
+
+    </form>
+
+    <%- include("partials/footer") %>
