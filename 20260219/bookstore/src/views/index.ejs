@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+    <h1>Book Management</h1>
+
+    <!-- Add Book Form -->
+    <form id="allbooks" action="/books/add" method="POST">
+        <input type="text" name="bookName" placeholder="Book name" required />
+        <button type="submit">Add</button>
+    </form>
+
+    <!-- Search Form -->
+    <form action="/" method="GET">
+        <input type="text" name="keyword" placeholder="search.." value="<%= keyword || '' %>" />
+        <button type="submit">Search</button>
+    </form>
+
+    <h2>Book List</h2>
+    <div id="book-list">
+        <% if (books && books.length> 0) { %>
+            <%- include('partials/book-list', { books: books }) %>
+                <% } else { %>
+                    <p>No books found.</p>
+                    <% } %>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,11 @@
+<ul style="list-style: none; padding: 0;">
+    <% books.forEach(function(b) { %>
+        <li style="margin-bottom: 10px;">
+            <%= b.bookNo %>: <%= b.bookName %>
+                    <form action="/books/delete/<%= b.bookNo %>" method="POST" style="display: inline;">
+                        <button type="submit" class="delete-button">Delete</button>
+                    </form>
+        </li>
+        <hr>
+        <% }); %>
+</ul>
