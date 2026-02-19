@@ -1,24 +1,52 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import path from "path";
-import { serveIndex, getAllBooks, addBookHandler, deleteBookHandler, searchBooksHandler } from "../index";
+import { addBook, deleteBook, readBooks, searchBooks } from "../services/fileDb";
 
-const app = express();
-const PORT = process.env.PORT || 3000;
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static(path.join(process.cwd(), "public")));
+export const serveIndex = (req: Request, res: Response) => {
+    // TODO 6: Send public/index.html
+    // Hint: res.sendFile(path.join(process.cwd(), "public", "index.html"));
+    res.sendFile(path.join(process.cwd(), "public", "index.html"));
+};
 
-app.get("/", serveIndex);
+export const getAllBooks = (req: Request, res: Response) => {
+    // TODO 7: Return all books as JSON
+    // Hint: const books = readBooks(); return res.json(books);
+    const books = readBooks();
+    return res.json(books);
+};
 
-app.get("/books", getAllBooks);
+export const addBookHandler = (req: Request, res: Response) => {
+    try {
+        // TODO 8: Read bookName from req.body.bookName and validate (trim it)
+        // If empty -> return res.status(400).send("bookName is required");
+        const bookName = (req.body.bookName || "").trim();
+        if (!bookName) {
+            return res.status(400).send("bookName is required");
+        }
 
-app.post("/books/add", addBookHandler);
+        // TODO 9: Call addBook(bookName)
+        addBook(bookName);
 
-app.delete("/books/delete/:bookNo", deleteBookHandler);
+        // TODO 10: Redirect to "/" after success
+        return res.redirect("/");
 
-app.get("/books/search", searchBooksHandler);
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send("Server error");
+    }
+};
 
-app.listen(PORT, () => {
-    console.log(`Server running: http://localhost:${PORT}`);
-});
+
+export const deleteBookHandler = (req: Request, res: Response) => {
+    const bookNo = Number(req.params.bookNo);
+    deleteBook(bookNo);
+    return res.sendStatus(204);
+};
+
+
+export const searchBooksHandler = (req: Request, res: Response) => {
+    const keyword = req.query.keyword?.toString().toLowerCase() || "";
+    const searchResults = searchBooks(keyword);
+    return res.json(searchResults);
+};
